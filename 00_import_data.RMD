@@ -1,9 +1,16 @@
 ---
 title: "Import and normalize USGS WTDB"
-output: html_notebook
-author: 'bk kei'
-license: 'unlicense'
+author: "bk kei"
+output:
+  html_document:
+    df_print: paged
+license: unlicense
 ---
+
+
+```{r set-options, echo=FALSE, cache=FALSE}
+options(width = 120)
+```
 
 ## Introduction
 Notes on how USGS WTDB was normalized for use in KEI Baseline.
@@ -23,17 +30,42 @@ Generic detail needed in Baseline that is common to all asset and equipment type
 Baseline will include data from EIA, which will be treated similarly.
 
 
+### Descriptions
+
+The file with descriptions of the data is found here:
+https://www.sciencebase.gov/catalog/item/5e999f7982ce172707f6fd26 
+
 
 ```{r}
 
 library(data.table)
+library(knitr)
+library(kableExtra)
+fname <- 'data/EntityandAttribute_DataDictionary.csv'
+descriptions <- fread(fname,nrows = 26)
+descriptions <- descriptions[,c(1,3)]
+kable(descriptions) %>% kable_styling(font_size = 10)
+
+```
+
+
+
+### The data
+
+The USGS csv file is a 'flat' file, combining data attributes that can be 'normalized' by dividing into multiple tables that better represent the structure of the data.
+
+
+```{r}
+
 fname <- 'data/uswtdb_v3_2_20201014.csv'
 data <- fread(fname)
 str(data)
 
 ```
 
+### Asset list
 
+In the descriptions we see the word 'project' several times.  A wind or solar asset is a 'project' when it is being designed and built. It is an 'asset' or 'facility' once it is constructed. They are called projects here because the USGS dataaset includes facilities still under construction or in the design phase, with turbine locations registered with the FAA. The 'project' designator will be used to group turbines into their associated facility/asset names that almost always carry over from their preconstruction project names.
 
 
 
