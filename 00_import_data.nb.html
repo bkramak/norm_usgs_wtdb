@@ -1799,9 +1799,16 @@ summary {
 
 
 <!-- rnb-text-begin -->
-<div id="section" class="section level3">
-<h3></h3>
-<p>Notes on how USGS WTDB was normalized for use in KEI Baseline.</p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Notes on how USGS WTDB was normalized for use in KEI Baseline. Data can be found here: <a href="https://eerscmap.usgs.gov/uswtdb/data/" class="uri">https://eerscmap.usgs.gov/uswtdb/data/</a></p>
+<p>Credit: Hoen, B.D., Diffendorfer, J.E., Rand, J.T., Kramer, L.A., Garrity, C.P., and Hunt, H.E., 2018, United States Wind Turbine Database (ver. 3.2, October 14, 2020): U.S. Geological Survey, American Wind Energy Association, and Lawrence Berkeley National Laboratory data release, <a href="https://doi.org/10.5066/F7TX3DN0" class="uri">https://doi.org/10.5066/F7TX3DN0</a>.</p>
+</div>
+<div id="baseline-db-structure" class="section level2">
+<h2>Baseline db structure</h2>
+<p>The KEI Baseline database calls wind and solar plant ‘entities’ the ‘assets’ stored in table ‘asset. The wind turbines are called ’equipment’ along with solar plant inverters.</p>
+<p>Generic detail needed in Baseline that is common to all asset and equipment types is stored ‘wide’ in the main asset and equipment tables. data specific to the USGS dataset is stored in associated tables asset_meta_detail and equip_meta_detail. This way as additional asset/equipment is loaded for facilities outside the US, it need not contain a lot of null values specific to the USGS db, but we maintain the USGS specific info, and allow for the reverse situation where other foreign sites might have useful metadata not included in the USGS WTDB.</p>
+<p>Baseline will include data from EIA, which will be treated similarly.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKGRhdGEpXG5cbmBgYCJ9 -->
@@ -1839,17 +1846,11 @@ summary {
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-</div>
-<div id="baseline-db-structure" class="section level3">
-<h3>Baseline db structure</h3>
-<p>The KEI Baseline database calls wind and solar plant ‘entities’ the ‘assets’ stored in table ‘asset. The wind turbines are called ’equipment’ along with solar plant inverters.</p>
-<p>Generic detail needed in Baseline that is common to all asset and equipment types is stored ‘wide’ in the main asset and equipment tables. data specific to the USGS dataset is stored in associated tables asset_meta_detail and equip_meta_detail. This way as additional asset/equipment is loaded for facilities outside the US, it need not contain a lot of null values specific to the USGS db, but we maintain the USGS specific info, and allow for the reverse situation where other foreign sites might have useful metadata not included in the USGS WTDB.</p>
-<p>Baseline will include data from EIA, which will be treated similarly.</p>
 <p>.</p>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW1wb3J0IGFuZCBub3JtYWxpemUgVVNHUyBXVERCIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKYXV0aG9yOiAnYmsga2VpJwpsaWNlbnNlOiAndW5saWNlbnNlJwotLS0KCiMjIyAKTm90ZXMgb24gaG93IFVTR1MgV1REQiB3YXMgbm9ybWFsaXplZCBmb3IgdXNlIGluIEtFSSBCYXNlbGluZS4KCgoKYGBge3J9CgpsaWJyYXJ5KGRhdGEudGFibGUpCmZuYW1lIDwtICdkYXRhL3Vzd3RkYl92M18yXzIwMjAxMDE0LmNzdicKZGF0YSA8LSBmcmVhZChmbmFtZSkKc3RyKGRhdGEpCgpgYGAKIyMjIEJhc2VsaW5lIGRiIHN0cnVjdHVyZQoKVGhlIEtFSSBCYXNlbGluZSBkYXRhYmFzZSBjYWxscyB3aW5kIGFuZCBzb2xhciBwbGFudCAnZW50aXRpZXMnIHRoZSAnYXNzZXRzJyBzdG9yZWQgaW4gdGFibGUgJ2Fzc2V0LiBUaGUgd2luZCB0dXJiaW5lcyBhcmUgY2FsbGVkICdlcXVpcG1lbnQnIGFsb25nIHdpdGggc29sYXIgcGxhbnQgaW52ZXJ0ZXJzLgoKR2VuZXJpYyBkZXRhaWwgbmVlZGVkIGluIEJhc2VsaW5lIHRoYXQgaXMgY29tbW9uIHRvIGFsbCBhc3NldCBhbmQgZXF1aXBtZW50IHR5cGVzIGlzIHN0b3JlZCAnd2lkZScgaW4gdGhlIG1haW4gYXNzZXQgYW5kIGVxdWlwbWVudCB0YWJsZXMuICBkYXRhIHNwZWNpZmljIHRvIHRoZSBVU0dTIGRhdGFzZXQgaXMgc3RvcmVkIGluIGFzc29jaWF0ZWQgdGFibGVzIGFzc2V0X21ldGFfZGV0YWlsIGFuZCBlcXVpcF9tZXRhX2RldGFpbC4gVGhpcyB3YXkgYXMgYWRkaXRpb25hbCBhc3NldC9lcXVpcG1lbnQgaXMgbG9hZGVkIGZvciBmYWNpbGl0aWVzIG91dHNpZGUgdGhlIFVTLCBpdCBuZWVkIG5vdCBjb250YWluIGEgbG90IG9mIG51bGwgdmFsdWVzIHNwZWNpZmljIHRvIHRoZSBVU0dTIGRiLCBidXQgd2UgbWFpbnRhaW4gdGhlIFVTR1Mgc3BlY2lmaWMgaW5mbywgYW5kIGFsbG93IGZvciB0aGUgcmV2ZXJzZSBzaXR1YXRpb24gd2hlcmUgb3RoZXIgZm9yZWlnbiBzaXRlcyBtaWdodCBoYXZlIHVzZWZ1bCBtZXRhZGF0YSBub3QgaW5jbHVkZWQgaW4gdGhlIFVTR1MgV1REQi4KCkJhc2VsaW5lIHdpbGwgaW5jbHVkZSBkYXRhIGZyb20gRUlBLCB3aGljaCB3aWxsIGJlIHRyZWF0ZWQgc2ltaWxhcmx5LgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgouCgoKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW1wb3J0IGFuZCBub3JtYWxpemUgVVNHUyBXVERCIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKYXV0aG9yOiAnYmsga2VpJwpsaWNlbnNlOiAndW5saWNlbnNlJwotLS0KCiMjIEludHJvZHVjdGlvbgpOb3RlcyBvbiBob3cgVVNHUyBXVERCIHdhcyBub3JtYWxpemVkIGZvciB1c2UgaW4gS0VJIEJhc2VsaW5lLgpEYXRhIGNhbiBiZSBmb3VuZCBoZXJlOiBodHRwczovL2VlcnNjbWFwLnVzZ3MuZ292L3Vzd3RkYi9kYXRhLyAKCkNyZWRpdDoKSG9lbiwgQi5ELiwgRGlmZmVuZG9yZmVyLCBKLkUuLCBSYW5kLCBKLlQuLCBLcmFtZXIsIEwuQS4sIEdhcnJpdHksIEMuUC4sIGFuZCBIdW50LCBILkUuLCAyMDE4LCBVbml0ZWQgU3RhdGVzIFdpbmQgVHVyYmluZSBEYXRhYmFzZSAodmVyLiAzLjIsIE9jdG9iZXIgMTQsIDIwMjApOiBVLlMuIEdlb2xvZ2ljYWwgU3VydmV5LCBBbWVyaWNhbiBXaW5kIEVuZXJneSBBc3NvY2lhdGlvbiwgYW5kIExhd3JlbmNlIEJlcmtlbGV5IE5hdGlvbmFsIExhYm9yYXRvcnkgZGF0YSByZWxlYXNlLCBodHRwczovL2RvaS5vcmcvMTAuNTA2Ni9GN1RYM0ROMC4KCgoKIyMgQmFzZWxpbmUgZGIgc3RydWN0dXJlCgpUaGUgS0VJIEJhc2VsaW5lIGRhdGFiYXNlIGNhbGxzIHdpbmQgYW5kIHNvbGFyIHBsYW50ICdlbnRpdGllcycgdGhlICdhc3NldHMnIHN0b3JlZCBpbiB0YWJsZSAnYXNzZXQuIFRoZSB3aW5kIHR1cmJpbmVzIGFyZSBjYWxsZWQgJ2VxdWlwbWVudCcgYWxvbmcgd2l0aCBzb2xhciBwbGFudCBpbnZlcnRlcnMuCgpHZW5lcmljIGRldGFpbCBuZWVkZWQgaW4gQmFzZWxpbmUgdGhhdCBpcyBjb21tb24gdG8gYWxsIGFzc2V0IGFuZCBlcXVpcG1lbnQgdHlwZXMgaXMgc3RvcmVkICd3aWRlJyBpbiB0aGUgbWFpbiBhc3NldCBhbmQgZXF1aXBtZW50IHRhYmxlcy4gIGRhdGEgc3BlY2lmaWMgdG8gdGhlIFVTR1MgZGF0YXNldCBpcyBzdG9yZWQgaW4gYXNzb2NpYXRlZCB0YWJsZXMgYXNzZXRfbWV0YV9kZXRhaWwgYW5kIGVxdWlwX21ldGFfZGV0YWlsLiBUaGlzIHdheSBhcyBhZGRpdGlvbmFsIGFzc2V0L2VxdWlwbWVudCBpcyBsb2FkZWQgZm9yIGZhY2lsaXRpZXMgb3V0c2lkZSB0aGUgVVMsIGl0IG5lZWQgbm90IGNvbnRhaW4gYSBsb3Qgb2YgbnVsbCB2YWx1ZXMgc3BlY2lmaWMgdG8gdGhlIFVTR1MgZGIsIGJ1dCB3ZSBtYWludGFpbiB0aGUgVVNHUyBzcGVjaWZpYyBpbmZvLCBhbmQgYWxsb3cgZm9yIHRoZSByZXZlcnNlIHNpdHVhdGlvbiB3aGVyZSBvdGhlciBmb3JlaWduIHNpdGVzIG1pZ2h0IGhhdmUgdXNlZnVsIG1ldGFkYXRhIG5vdCBpbmNsdWRlZCBpbiB0aGUgVVNHUyBXVERCLgoKQmFzZWxpbmUgd2lsbCBpbmNsdWRlIGRhdGEgZnJvbSBFSUEsIHdoaWNoIHdpbGwgYmUgdHJlYXRlZCBzaW1pbGFybHkuCgoKCmBgYHtyfQoKbGlicmFyeShkYXRhLnRhYmxlKQpmbmFtZSA8LSAnZGF0YS91c3d0ZGJfdjNfMl8yMDIwMTAxNC5jc3YnCmRhdGEgPC0gZnJlYWQoZm5hbWUpCnN0cihkYXRhKQoKYGBgCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKLgoKCgoKCg==</div>
 
 
 

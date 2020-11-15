@@ -5,8 +5,22 @@ author: 'bk kei'
 license: 'unlicense'
 ---
 
-### 
+## Introduction
 Notes on how USGS WTDB was normalized for use in KEI Baseline.
+Data can be found here: https://eerscmap.usgs.gov/uswtdb/data/ 
+
+Credit:
+Hoen, B.D., Diffendorfer, J.E., Rand, J.T., Kramer, L.A., Garrity, C.P., and Hunt, H.E., 2018, United States Wind Turbine Database (ver. 3.2, October 14, 2020): U.S. Geological Survey, American Wind Energy Association, and Lawrence Berkeley National Laboratory data release, https://doi.org/10.5066/F7TX3DN0.
+
+
+
+## Baseline db structure
+
+The KEI Baseline database calls wind and solar plant 'entities' the 'assets' stored in table 'asset. The wind turbines are called 'equipment' along with solar plant inverters.
+
+Generic detail needed in Baseline that is common to all asset and equipment types is stored 'wide' in the main asset and equipment tables.  data specific to the USGS dataset is stored in associated tables asset_meta_detail and equip_meta_detail. This way as additional asset/equipment is loaded for facilities outside the US, it need not contain a lot of null values specific to the USGS db, but we maintain the USGS specific info, and allow for the reverse situation where other foreign sites might have useful metadata not included in the USGS WTDB.
+
+Baseline will include data from EIA, which will be treated similarly.
 
 
 
@@ -18,14 +32,6 @@ data <- fread(fname)
 str(data)
 
 ```
-### Baseline db structure
-
-The KEI Baseline database calls wind and solar plant 'entities' the 'assets' stored in table 'asset. The wind turbines are called 'equipment' along with solar plant inverters.
-
-Generic detail needed in Baseline that is common to all asset and equipment types is stored 'wide' in the main asset and equipment tables.  data specific to the USGS dataset is stored in associated tables asset_meta_detail and equip_meta_detail. This way as additional asset/equipment is loaded for facilities outside the US, it need not contain a lot of null values specific to the USGS db, but we maintain the USGS specific info, and allow for the reverse situation where other foreign sites might have useful metadata not included in the USGS WTDB.
-
-Baseline will include data from EIA, which will be treated similarly.
-
 
 
 
