@@ -1,0 +1,66 @@
+---
+title: "Import and normalize USGS WTDB"
+output: html_notebook
+author: 'bk kei'
+license: 'unlicense'
+---
+
+### 
+Notes on how USGS WTDB was normalized for use in KEI Baseline.
+
+
+
+```{r}
+
+library(data.table)
+fname <- 'data/uswtdb_v3_2_20201014.csv'
+data <- fread(fname)
+str(data)
+
+```
+### Baseline db structure
+
+The KEI Baseline database calls wind and solar plant 'entities' the 'assets' stored in table 'asset. The wind turbines are called 'equipment' along with solar plant inverters.
+
+Generic detail needed in Baseline that is common to all asset and equipment types is stored 'wide' in the main asset and equipment tables.  data specific to the USGS dataset is stored in associated tables asset_meta_detail and equip_meta_detail. This way as additional asset/equipment is loaded for facilities outside the US, it need not contain a lot of null values specific to the USGS db, but we maintain the USGS specific info, and allow for the reverse situation where other foreign sites might have useful metadata not included in the USGS WTDB.
+
+Baseline will include data from EIA, which will be treated similarly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+
+
+
+
+
